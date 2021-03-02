@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<CompositeMetadata>
+  <Category displayName="Ed-Fi Assessment" name="assessment">
+    <Routes>
+      <Route relativeRouteTemplate="/localEducationAgencies/{LocalEducationAgency.Id}/{compositeName}" />
+      <Route relativeRouteTemplate="/schools/{School.Id}/{compositeName}" />
+      <Route relativeRouteTemplate="/staffs/{Staff.Id}/{compositeName}" />
+      <Route relativeRouteTemplate="/sections/{Section.Id}/{compositeName}" />
+      <Route relativeRouteTemplate="/programs/{Program.Id}/{compositeName}" />
+      <Route relativeRouteTemplate="/students/{Student.Id}/{compositeName}" />
+      <Route relativeRouteTemplate="/assessments/{Assessment.Id}/{compositeName}" />
+    </Routes>
+    <Composites>
+      <Composite name="Assessment" includeTypesForDescriptors="true">
+        <Specification>
+          <Parameter name="LocalEducationAgency.Id" filterPath="StudentAssessments->Student->StudentSchoolAssociations->School->LocalEducationAgency.Id" />
+          <Parameter name="School.Id" filterPath="StudentAssessments->Student->StudentSchoolAssociations->School.Id" />
+          <Parameter name="Staff.Id" filterPath="AssessmentSections->Section->StaffSectionAssociations->Staff.Id" />
+          <Parameter name="Section.Id" filterPath="AssessmentSections->Section.Id" />
+          <Parameter name="Program.Id" filterPath="AssessmentPrograms->Program.Id" />
+          <Parameter name="Student.Id" filterPath="StudentAssessments->Student.Id" />
+        </Specification>
+        <BaseResource name="Assessment">
+          <Property name="Id" />
+          <Property name="AssessmentTitle" />
+          <Property name="AcademicSubjectDescriptor" />
+          <Property name="AssessedGradeLevelDescriptor" />
+          <Property name="Version" />
+
+          <Property name="AssessmentCategoryDescriptor" />
+          <Property name="AssessmentForm" />
+
+          <Collection name="AssessmentIdentificationCodes">
+            <Property name="AssigningOrganizationIdentificationCode" />
+            <Property name="IdentificationCode" />
+          </Collection>
+
+          <Collection name="AssessmentPerformanceLevels">
+            <Property name="MinimumScore" />
+            <Property name="MaximumScore" />
+            <Property name="ResultDatatypeType" />
+          </Collection>
+
+          <Property name="AssessmentPeriodDescriptor" />
+          <Property name="LowestAssessedGradeLevelDescriptor" />
+          <Property name="MaxRawScore" />
+          <Property name="Namespace" />
+          <Property name="Nomenclature" />
+          <Property name="RevisionDate" />
+
+          <LinkedCollection name="ObjectiveAssessments" useHierarchy="true">
+            <Property name="Id" />
+            <Property name="IdentificationCode" />
+            <Property name="Description" />
+            <Property name="MaxRawScore" />
+            <Property name="Nomenclature" />
+            <Property name="PercentOfAssessment" />
+
+            <Collection name="ObjectiveAssessmentPerformanceLevels">
+              <Property name="PerformanceLevelDescriptor" />
+              <Property name="AssessmentReportingMethodType" />
+              <Property name="MinimumScore" />
+              <Property name="MaximumScore" />
+              <Property name="ResultDatatypeType" />
+            </Collection>
+
+            <Collection name="ObjectiveAssessmentLearningObjectives" displayName="learningObjectives">
+              <ReferencedResource name="LearningObjectiveReference" flatten="true">
+                <Property name="Id" />
+                <Property name="Objective" />
+                <Property name="ObjectiveGradeLevelDescriptor" />
+                <Property name="AcademicSubjectDescriptor" />
+
+                <Property name="Description" />
+                <Property name="LearningObjectiveId" />
+                <Property name="Nomenclature" />
+                <Property name="SuccessCriteria" />
+
+                <Collection name="LearningObjectiveLearningStandards" displayName="learningStandards">
+                  <ReferencedResource name="LearningStandardReference" flatten="true">
+                    <Property name="Id" />
+                    <Property name="AcademicSubjectDescriptor" />
+                    <Property name="Description" />
+                    <Property name="LearningStandardId" />
+                    <Property name="Namespace" />
+
+                    <Property name="CourseTitle" />
+
+                    <Collection name="LearningStandardIdentificationCodes" displayName="learningStandardIdentificationCodes">
+                      <Property name="IdentificationCode" />
+                      <Property name="ContentStandardName" />
+                    </Collection>
+
+                    <Property name="LearningStandardItemCode" />
+                    <Property name="SuccessCriteria" />
+                    <Property name="URI" />
+                  </ReferencedResource>
+                </Collection>
+              </ReferencedResource>
+            </Collection>
+
+            <Collection name="ObjectiveAssessmentLearningStandards" displayName="learningStandards">
+              <ReferencedResource name="LearningStandardReference" flatten="true">
+                <Property name="Id" />
+                <Property name="AcademicSubjectDescriptor" />
+                <Property name="Description" />
+                <Property name="LearningStandardId" />
+                <Property name="Namespace" />
+
+                <Property name="CourseTitle" />
+
+                <Collection name="LearningStandardIdentificationCodes" displayName="learningStandardIdentificationCodes">
+                  <Property name="IdentificationCode" />
+                  <Property name="ContentStandardName" />
+                </Collection>
+
+                <Property name="LearningStandardItemCode" />
+                <Property name="SuccessCriteria" />
+                <Property name="URI" />
+              </ReferencedResource>
+            </Collection>
+          </LinkedCollection>
+        </BaseResource>
+      </Composite>
+      <Composite name="StudentAssessment" includeTypesForDescriptors="true">
+        <Specification>
+          <Parameter name="LocalEducationAgency.Id" filterPath="Student->StudentSchoolAssociations->School->LocalEducationAgency.Id" />
+          <Parameter name="School.Id" filterPath="Student->StudentSchoolAssociations->School.Id" />
+          <Parameter name="Staff.Id" filterPath="Student->StudentSectionAssociations->Section->StaffSectionAssociations->Staff.Id" />
+          <Parameter name="Section.Id" filterPath="Student->StudentSectionAssociations->Section.Id" />
+          <Parameter name="Program.Id" filterPath="Student->StudentProgramAssociations->Program.Id" />
+          <Parameter name="Student.Id" filterPath="Student.Id" />
+          <Parameter name="Assessment.Id" filterPath="Assessment.Id" queryable="true" description="The unique identifier of the associated Assessment." />
+        </Specification>
+        <BaseResource name="StudentAssessment">
+          <Property name="Id" />
+          <Property name="StudentUniqueId" />
+          <Property name="AdministrationDate" />
+
+          <ReferencedResource name="AssessmentReference">
+            <Property name="Id" />
+            <Property name="AssessmentTitle" />
+            <Property name="AcademicSubjectDescriptor" />
+            <Property name="AssessedGradeLevelDescriptor" />
+            <Property name="Version" />
+          </ReferencedResource>
+          
+          <Collection name="StudentAssessmentAccommodations" displayName="accommodations">
+            <Property name="AccommodationDescriptor" />
+          </Collection>
+
+          <Property name="AdministrationEndDate" />
+          <Property name="AdministrationEnvironmentType" />
+          <Property name="AdministrationLanguageDescriptor" />
+          <Property name="EventCircumstanceType" />
+          <Property name="EventDescription" />
+          <Collection name="StudentAssessmentPerformanceLevels" displayName="performanceLevels">
+            <Property name="PerformanceLevelDescriptor" />
+            <Property name="PerformanceLevelMet" />
+          </Collection>
+
+          <Property name="ReasonNotTestedType" />
+          <Property name="RetestIndicatorType" />
+
+          <Collection name="StudentAssessmentScoreResults" displayName="scoreResults">
+            <Property name="AssessmentReportingMethodType" />
+            <Property name="Result" />
+            <Property name="ResultDatatypeType" />
+          </Collection>
+
+          <Property name="SerialNumber" />
+          <Property name="WhenAssessedGradeLevelDescriptor" />
+
+          <ReferencedResource name="StudentReference" displayName="student">
+            <Property name="Id" />
+            <Property name="FirstName" />
+            <Property name="LastSurname" />
+            <Property name="BirthDate" />
+          </ReferencedResource>
+
+          <Collection name="StudentAssessmentStudentObjectiveAssessments" displayName="objectiveAssessments" useReferencedHierarchy="true" hierarchicalReferenceName="ObjectiveAssessmentReference">
+            <Property name="IdentificationCode" />
+
+            <Collection name="StudentAssessmentStudentObjectiveAssessmentPerformanceLevels" displayName="performanceLevels">
+              <Property name="PerformanceLevelDescriptor" />
+              <Property name="PerformanceLevelMet" />
+            </Collection>
+
+            <Collection name="StudentAssessmentStudentObjectiveAssessmentScoreResults" displayName="scoreResults">
+              <Property name="AssessmentReportingMethodType" />
+              <Property name="Result" />
+              <Property name="ResultDatatypeType" />
+            </Collection>
+          </Collection>
+        </BaseResource>
+      </Composite>
+    </Composites>
+  </Category>
+</CompositeMetadata>

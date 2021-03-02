@@ -1,10 +1,12 @@
-﻿# Insert Repository Name Here
+﻿# Assessment-Composite
 
-Insert project information here
+This contribution contains the artifacts needed to create the assessment composite in an ODS/API v2.x.
+
+For instructions on how to integrate composites into an OSD/API implementation, see [API Composite Resources](https://techdocs.ed-fi.org/display/ODSAPI24/API+Composite+Resources).
 
 ## Legal Information
 
-Copyright (c) 2020 Ed-Fi Alliance, LLC and contributors.
+Copyright (c) 2021 Ed-Fi Alliance, LLC and contributors.
 
 Licensed under the [Apache License, Version 2.0](LICENSE) (the "License").
 
